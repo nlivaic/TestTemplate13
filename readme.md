@@ -29,7 +29,7 @@ At this point only `.gitignore` has been committed locally. Now you can make som
 
 At this point you have a local environment and Azure fully set up, along with ADO pipelines ready deploy your code to a working AppService. Start working on your features!
 
-# Before You Get Started
+# Before You Get Started 
 
 ## Install a Docker host
 
