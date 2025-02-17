@@ -10,7 +10,7 @@ $sqlSaPasswordSecretName = "SqlSaPassword"
 $sqlAdminPasswordSecretName = "SqlAdminPassword"
 $dbConnectionName = 'TestTemplate13DbConnection'
 $messageBrokerName = 'MessageBroker'
-$applicationInsightsConnectionName = 'APPLICATIONINSIGHTS--CONNECTION--STRING'
+# $applicationInsightsConnectionName = 'APPLICATIONINSIGHTS----CONNECTION----STRING'
 
 # We have to check whether all the relevant secrets are in there.
 # If not, generate those secrets and store in Key Vault.
@@ -49,11 +49,11 @@ if ($messageBrokerConnectionString -ne $null) {
 	}
 }
 
-if ($appInsightsConnectionString -ne $null) {
-	$query = "contains([].id, 'https://$($keyVaultName).vault.azure.net/secrets/$($applicationInsightsConnectionName)')"
-	$exists = az keyvault secret list --vault-name $keyVaultName --query $query
-	if ($exists -eq "false") {
-		az keyvault secret set --vault-name $keyVaultName --name $applicationInsightsConnectionName --value "$($appInsightsConnectionString)" --output none
-		Write-Host "##[section]Set secret $applicationInsightsConnectionName"
-	}
-}
+# if ($appInsightsConnectionString -ne $null) {
+# 	$query = "contains([].id, 'https://$($keyVaultName).vault.azure.net/secrets/$($applicationInsightsConnectionName)')"
+# 	$exists = az keyvault secret list --vault-name $keyVaultName --query $query
+# 	if ($exists -eq "false") {
+# 		az keyvault secret set --vault-name $keyVaultName --name $applicationInsightsConnectionName --value "$($appInsightsConnectionString)" --output none
+# 		Write-Host "##[section]Set secret $applicationInsightsConnectionName"
+# 	}
+# }

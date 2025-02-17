@@ -42,6 +42,7 @@ var auth_authority_env_var_name = 'AuthAuthority'
 var auth_audience_env_var_name = 'AuthAudience'
 var auth_valid_issuer_env_var_name = 'AuthValidIssuer'
 var vault_uri_env_var_name = 'KeyVault__Uri'
+var applicationinsights_connectionstring_env_var_name = 'APPLICATIONINSIGHTS_CONNECTION_STRING'
 
 resource sqlserver 'Microsoft.Sql/servers@2022-11-01-preview' = {
   name: sqlserver_name
@@ -133,6 +134,10 @@ resource app_service_appsetting 'Microsoft.Web/sites/config@2022-09-01' = {
       {
         name: vault_uri_env_var_name
         value: vault_uri
+      }
+      {
+        name: applicationinsights_connectionstring_env_var_name
+        value: app_insights.properties.ConnectionString
       }
     ]
     numberOfWorkers: 1
