@@ -110,7 +110,7 @@ namespace TestTemplate13.Api
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddLoggingScopes();
-            if (!string.IsNullOrEmpty(_configuration["ApplicationInsightsConnectionString"]))
+            if (!string.IsNullOrEmpty(_configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
             {
                 services
                     .AddOpenTelemetry()
@@ -133,7 +133,7 @@ namespace TestTemplate13.Api
                             .AddSource(DiagnosticHeaders.DefaultListenerName) // MassTransit ActivitySource
                             .AddAzureMonitorTraceExporter(o =>
                             {
-                                o.ConnectionString = _configuration["ApplicationInsightsConnectionString"];
+                                o.ConnectionString = _configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
                             });
                     })
                     .WithMetrics(meterProviderBuilder =>
@@ -153,7 +153,7 @@ namespace TestTemplate13.Api
                             .AddMeter(InstrumentationOptions.MeterName) // MassTransit Meter: https://masstransit.io/documentation/configuration/observability
                             .AddAzureMonitorMetricExporter(o =>
                             {
-                                o.ConnectionString = _configuration["ApplicationInsightsConnectionString"];
+                                o.ConnectionString = _configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
                             });
                     });
             }

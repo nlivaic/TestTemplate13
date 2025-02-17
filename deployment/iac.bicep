@@ -224,4 +224,3 @@ output sqlServerName string = sqlserver_name
 output appServiceWebName string = appService_web_name
 output dbConnection string = 'Server=tcp:${sqlserver.properties.fullyQualifiedDomainName},1433;Initial Catalog=${sqlserver::sqlDb.name};Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
 output messageBrokerConnectionString string = listKeys('${service_bus.id}/AuthorizationRules/${service_bus_ReadWritePolicy_name}', service_bus.apiVersion).primaryConnectionString
-output appInsightsConnectionString string = app_insights.properties.ConnectionString
