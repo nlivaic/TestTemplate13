@@ -135,7 +135,7 @@ namespace TestTemplate13.WorkerServices
                             o.UseBusOutbox();
                         });
                     });
-                    if (!string.IsNullOrEmpty(configuration["ApplicationInsightsConnectionString"]))
+                    if (!string.IsNullOrEmpty(configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
                     {
                         services
                             .AddOpenTelemetry()
@@ -152,7 +152,7 @@ namespace TestTemplate13.WorkerServices
                                     .AddSource(DiagnosticHeaders.DefaultListenerName) // MassTransit ActivitySource
                                     .AddAzureMonitorTraceExporter(o =>
                                     {
-                                        o.ConnectionString = configuration["ApplicationInsightsConnectionString"];
+                                        o.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
                                     });
                             })
                             .WithMetrics(meterProviderBuilder =>
@@ -170,7 +170,7 @@ namespace TestTemplate13.WorkerServices
                                     .AddMeter(InstrumentationOptions.MeterName) // MassTransit Meter: https://masstransit.io/documentation/configuration/observability
                                     .AddAzureMonitorMetricExporter(o =>
                                     {
-                                        o.ConnectionString = configuration["ApplicationInsightsConnectionString"];
+                                        o.ConnectionString = configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
                                     });
                             });
                     }
