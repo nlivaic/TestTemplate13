@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TestTemplate13.Application.Questions.Commands;
 using TestTemplate13.Application.Questions.Queries;
@@ -17,15 +18,27 @@ namespace TestTemplate13.Api.Controllers
         private readonly ISender _sender;
         private readonly IMapper _mapper;
         private readonly ILogger<FoosController> _logger;
+        private readonly IConfiguration _configuration;
 
         public FoosController(
             ISender sender,
             IMapper mapper,
-            ILogger<FoosController> logger)
+            ILogger<FoosController> logger,
+            IConfiguration configuration)
         {
             _sender = sender;
             _mapper = mapper;
             _logger = logger;
+            _configuration = configuration;
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Produces("application/json")]
+        [HttpGet("envvar/{name}")]
+        public ActionResult GetEnvVar([FromRoute] string name)
+        {
+            var envVar = _configuration[name];
+            return Ok(envVar);
         }
 
         /// <summary>
